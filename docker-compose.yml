@@ -8,9 +8,9 @@ services:
     environment:
       - POSTGRES_USER=docker
       - POSTGRES_PASSWORD=docker
-      - POSTGRES_DB=poems
+      - POSTGRES_DB=poetry
     volumes:
-      - polls_pg_data:/bitnami/postgresql
+      - poetry_pg_data:/bitnami/postgresql
 
   redis:
     image: bitnami/redis:latest
@@ -19,8 +19,8 @@ services:
     ports:
       - "6379:6379"
     volumes:
-      - "polls_redis_data:/bitnami/redis/data"
+      - "poetry_redis_data:/bitnami/redis/data"
 
 volumes:
-  polls_pg_data:
-  polls_redis_data:
+  poetry_pg_data:
+  poetry_redis_data:
