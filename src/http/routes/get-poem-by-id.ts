@@ -1,4 +1,4 @@
-import { FastifyInstance } from "fastify";
+import { FastifyInstance, FastifyReply, FastifyRequest } from "fastify";
 import { z } from "zod";
 
 import { prisma } from "../../lib/prisma";
@@ -6,42 +6,7 @@ import { prisma } from "../../lib/prisma";
 export async function getPoemById(app: FastifyInstance) {
   app.get(
     "/poems/:poemId",
-    {
-      schema: {
-        params: {
-          poemId: { type: "string" },
-        },
-        response: {
-          200: {
-            type: "object",
-            properties: {
-              id: { type: "string", format: "uuid" },
-              text: { type: "string" },
-              likes: { type: "number" },
-              comments: {
-                type: "array",
-                items: {
-                  type: "object",
-                  properties: {
-                    id: { type: "string", format: "uuid" },
-                    user: { type: "string" },
-                    content: { type: "string" },
-                  },
-                },
-              },
-              user: {
-                type: "object",
-                properties: {
-                  id: { type: "string", format: "uuid" },
-                  name: { type: "string" },
-                },
-              },
-            },
-          },
-        },
-      },
-    },
-    async (req, reply) => {
+    async (req: FastifyRequest, reply: FastifyReply) => {
       const getPoemParams = z.object({
         poemId: z.string().uuid(),
       });
@@ -74,9 +39,7 @@ export async function getPoemById(app: FastifyInstance) {
         });
       } catch (error) {
         console.error(error);
-        return reply
-          .status(500)
-          .send({ message: "Erro ao solicitar requisição" });
+        return reply.status(500).send({ message: "Erro desconhecido" });
       }
     }
   );
