@@ -13,6 +13,7 @@ import { deleteLike } from "./routes/delete-like";
 import { postComment } from "./routes/post-comment";
 import { editComment } from "./routes/edit-comment";
 import { deleteComment } from "./routes/delete-comment";
+import { getUserPoems } from "./routes/get-user-poems";
 
 const app: FastifyInstance = fastify();
 
@@ -36,6 +37,7 @@ app.register(deleteLike);
 app.register(postComment);
 app.register(editComment);
 app.register(deleteComment);
+app.register(getUserPoems);
 
 app.listen({ port: 3333 }).then(() => {
   console.log("Server running on port 3333");
