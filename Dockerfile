@@ -18,5 +18,7 @@ EXPOSE 3333
 # Build the TypeScript files to JavaScript
 RUN npm run build
 
+RUN npm run start
+
 # Start the application
 CMD ["npm", "start"]
