@@ -32,5 +32,5 @@ EXPOSE 3333
 ENV NODE_ENV=production
 
 # Start the application
-CMD ["node", "./dist"]
+CMD ["node", "./dist/http/server.js"]
 
