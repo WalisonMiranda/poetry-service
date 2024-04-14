@@ -26,7 +26,7 @@ FROM node:18-alpine
 WORKDIR /app
 
 # Copy the built application from the builder stage
-# COPY --from=builder /app/dist /app
+COPY --from=builder /app/dist /app
 
 # Expose port 3333 for the application
 EXPOSE 3333
