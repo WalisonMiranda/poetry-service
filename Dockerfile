@@ -1,10 +1,10 @@
 # Use an official Node.js runtime as the base image
 FROM node:18-alpine
 
-COPY . /app
+COPY ./app
 
 # Set the working directory in the container to /app
-WORKDIR /app
+WORKDIR ./app
 
 # Copy package.json and package-lock.json from host to container
 COPY package.json package-lock.json./
