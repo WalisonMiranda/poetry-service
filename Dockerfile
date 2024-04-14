@@ -16,6 +16,9 @@ COPY . .
 # Build the TypeScript files to JavaScript
 RUN npm run build
 
+# Copy the built application from the builder stage
+COPY --from=builder /app/dist /app/dist
+
 # Start a new stage for the production image
 FROM node:18-alpine
 
