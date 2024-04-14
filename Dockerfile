@@ -17,7 +17,7 @@ COPY . .
 RUN npm run build
 
 # Copy the built application from the builder stage
-COPY --from=builder /app/dist /app/dist
+COPY --from=builder /app/dist /app
 
 # Start a new stage for the production image
 FROM node:18-alpine
@@ -26,7 +26,7 @@ FROM node:18-alpine
 WORKDIR /app
 
 # Copy the built application from the builder stage
-COPY --from=builder /app/dist /app
+# COPY --from=builder /app/dist /app
 
 # Expose port 3333 for the application
 EXPOSE 3333
@@ -35,5 +35,5 @@ EXPOSE 3333
 ENV NODE_ENV=production
 
 # Start the application
-CMD ["node", "./dist/http/server.js"]
+CMD ["npm", "start"]
 
