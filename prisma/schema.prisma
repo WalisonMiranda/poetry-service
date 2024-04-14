@@ -2,51 +2,52 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 generator client {
-    provider = "prisma-client-js"
+  provider = "prisma-client-js"
 }
 
 datasource db {
-    provider = "postgresql"
-    url      = env("DATABASE_URL")
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
 }
 
 model User {
-    id       String @id @default(uuid())
-    name     String
-    email    String
-    password String
+  id       String @id @default(uuid())
+  name     String
+  email    String @unique
+  password String
 
-    poems   Poem[]
-    Like    Like[]
-    Comment Comment[]
+  poems    Poem[]
+  Likes    Like[]
+  Comments Comment[]
 }
 
 model Poem {
-    id     String @id @default(uuid())
-    text   String
-    userId String
+  id     String  @id @default(uuid())
+  title  String?
+  text   String
+  userId String
 
-    likes    Like[]
-    comments Comment[]
-    user     User      @relation(fields: [userId], references: [id])
+  likes    Like[]
+  comments Comment[]
+  user     User      @relation(fields: [userId], references: [id])
 }
 
 model Like {
-    id     String @id @default(uuid())
-    poemId String
-    userId String
+  id     String @id @default(uuid())
+  poemId String
+  userId String
 
-    poem Poem @relation(fields: [poemId], references: [id])
-    user User @relation(fields: [userId], references: [id])
+  poem Poem @relation(fields: [poemId], references: [id])
+  user User @relation(fields: [userId], references: [id])
 }
 
 model Comment {
-    id        String   @id @default(uuid())
-    poemId    String
-    userId    String
-    content   String
-    createdAt DateTime @default(now())
+  id        String   @id @default(uuid())
+  poemId    String
+  userId    String
+  content   String
+  createdAt DateTime @default(now())
 
-    poem Poem @relation(fields: [poemId], references: [id])
-    user User @relation(fields: [userId], references: [id])
+  poem Poem @relation(fields: [poemId], references: [id])
+  user User @relation(fields: [userId], references: [id])
 }
