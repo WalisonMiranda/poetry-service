@@ -39,8 +39,8 @@ app.register(editComment);
 app.register(deleteComment);
 app.register(getUserPoems);
 
-const port = process.env.PORT || 4000;
+const port = process.env.PORT || 3333;
 
-app.listen(port, () => {
+app.listen({ port: 3333, host: "0.0.0.0" }, () => {
   console.log(`server running on port ${port}`);
 });
