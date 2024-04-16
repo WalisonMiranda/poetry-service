@@ -10,12 +10,12 @@ services:
       
     NODE_TLS_REJECT_UNAUTHORIZED=0
       volumes:
-    ".:/application"
+        ".:/application"
     networks:
-    shared-services
+      shared-services
     ports:
-    "9229:9229"
-    "3333:3333"
+      "9229:9229"
+      "3333:3333"
   postgres:
     image: bitnami/postgresql:latest
     ports:
