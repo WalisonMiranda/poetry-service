@@ -1,33 +1,14 @@
-# Use an official Node.js runtime as the base image
-FROM node:18-alpine
+FROM node:20-alpine AS dev
 
-RUN mkdir /app
+ENV PATH="/application/node_modules/.bin:${PATH}"
+RUN apk add sudo bash ca-certificates
+RUN apk add git ca-certificates bash sudo make build-base python3 libcap openssh
+RUN update-ca-certificates
+RUN echo "node ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/node && chmod 0440 /etc/sudoers.d/node
+RUN setcap cap_net_bind_service=+ep /usr/local/bin/node
+RUN mkdir -p /home/node/.ssh && \
+  chmod 0700 /home/node/.ssh && \
+  chown node:node /home/node/.ssh
 
-# Set the working directory in the container to /app
-WORKDIR /app
-
-COPY package*.json /app/
-
-# Install any dependencies defined in the package.json file
-RUN npm install
-
-# Copy the rest of the application code
-COPY . /app/
-
-# Build the application (adjust if your build process is different)
-RUN npm run build
-
-# Set the working directory in the container to /app
-WORKDIR /app
-
-# Copy the built application from the builder stage (adjust if not applicable)
-COPY --from=builder /app/dist /app/dist
-
-# Expose port 3333 for the application
-EXPOSE 3333
-
-# Set the environment variable for production
-ENV NODE_ENV=production
-
-# Start the application
-CMD ["npm", "start"]
+CMD cd "/application" && \
+  npm start

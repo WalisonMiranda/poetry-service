@@ -1,16 +1,21 @@
 version: "3.7"
 
 services:
-  app:
+  poetry-service:
+    container_name: poetry-service
     build:
       context: .
-      dockerfile: Dockerfile
-    restart: unless-stopped
-    working_dir: /var/www/
-    volumes:
-      - .:/var/www/
+      target: production
+    environment:
+      
+    NODE_TLS_REJECT_UNAUTHORIZED=0
+      volumes:
+    ".:/application"
+    networks:
+    shared-services
     ports:
-      - 3333:3333
+    "9229:9229"
+    "3333:3333"
   postgres:
     image: bitnami/postgresql:latest
     ports:
