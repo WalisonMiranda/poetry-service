@@ -1,0 +1,30 @@
+version: "3.7"
+
+services:
+  poetry-service:
+    container_name: poetry-service
+    build:
+      context: .
+      # target: production
+    environment:
+      - NODE_TLS_REJECT_UNAUTHORIZED=0
+    volumes:
+      - ".:/application"
+    # networks:
+    #   - shared-services
+    ports:
+      - "9229:9229"
+      - "3333:3333"
+  postgres:
+    image: bitnami/postgresql:latest
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=docker
+      - POSTGRES_PASSWORD=docker
+      - POSTGRES_DB=poetry
+    volumes:
+      - poetry_pg_data:/bitnami/postgresql
+
+volumes:
+  poetry_pg_data:
