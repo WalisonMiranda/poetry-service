@@ -40,7 +40,6 @@ export async function login(app: FastifyInstance) {
           user: {
             id: user.id,
             name: user.name,
-            email: user.email,
           },
           token,
         });
