@@ -20,7 +20,13 @@ export async function getUserPoems(app: FastifyInstance) {
           },
           select: {
             name: true,
-            poems: true,
+            poems: {
+              id: true,
+              title: true,
+              text: true,
+              likes: true,
+              comments: true,
+            },
           },
         });
 
