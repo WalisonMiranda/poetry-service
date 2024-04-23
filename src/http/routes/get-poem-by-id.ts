@@ -19,13 +19,17 @@ export async function getPoemById(app: FastifyInstance) {
             id: poemId,
           },
           select: {
+            id: true,
+            title: true,
+            text: true,
             likes: true,
             user: {
-              select: {
+              select:{
                 name: true,
               },
             },
             comments: true,
+            userId: true,
           },
         });
 
@@ -34,10 +38,7 @@ export async function getPoemById(app: FastifyInstance) {
         }
 
         return reply.status(200).send({
-          poem,
-          author: poem.user.name,
-          likes: poem.likes,
-          comments: poem.comments,
+          poem
         });
       } catch (error) {
         console.error(error);
