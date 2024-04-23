@@ -31,9 +31,7 @@ export async function getPoemById(app: FastifyInstance) {
 
         return reply.status(200).send({
           poem,
-          user: {
-            name: poem.user.name,
-          },
+          author: poem.user.name,
           likes: poem.likes,
           comments: poem.comments,
         });
