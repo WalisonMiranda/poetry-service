@@ -35,8 +35,7 @@ export async function getUserPoems(app: FastifyInstance) {
         }
 
         return reply.status(200).send({
-          userName: user.name,
-          poems: user.poems,
+          user
         });
       } catch (error) {
         console.log(error);
