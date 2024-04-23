@@ -20,7 +20,11 @@ export async function getPoemById(app: FastifyInstance) {
           },
           select: {
             likes: true,
-            user: true,
+            user: {
+              select: {
+                name: true,
+              },
+            },
             comments: true,
           },
         });
