@@ -19,9 +19,29 @@ export async function getPoemById(app: FastifyInstance) {
             id: poemId,
           },
           select: {
+            id: true,
+            title: true,
+            text: true,
             likes: true,
-            user: true,
-            comments: true,
+            user: {
+              select: {
+                name: true,
+              },
+            },
+            comments: {
+              select: {
+                id: true,
+                content: true,
+                createdAt: true,
+                userId: true,
+                user: {
+                  select: {
+                    name: true,
+                  },
+                },
+              },
+            },
+            userId: true,
           },
         });
 
@@ -31,9 +51,6 @@ export async function getPoemById(app: FastifyInstance) {
 
         return reply.status(200).send({
           poem,
-          author: poem.user.name,
-          likes: poem.likes,
-          comments: poem.comments,
         });
       } catch (error) {
         console.error(error);

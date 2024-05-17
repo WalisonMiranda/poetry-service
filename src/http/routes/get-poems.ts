@@ -11,7 +11,7 @@ export async function getPoems(app: FastifyInstance) {
           title: true,
           text: true,
           user: true,
-          likes:  true,
+          likes: true,
           comments: true,
         },
       });
