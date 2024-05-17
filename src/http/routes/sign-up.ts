@@ -36,7 +36,7 @@ export async function signUp(app: FastifyInstance) {
     });
 
     const token = sign({ userId: user.id }, process.env.JWT_SECRET as string, {
-      expiresIn: "1d",
+      expiresIn: "7d",
     });
 
     // reply.setCookie("token", token, {
