@@ -32,7 +32,7 @@ export async function login(app: FastifyInstance) {
           { userId: user.id },
           process.env.JWT_SECRET as string,
           {
-            expiresIn: "7d",
+            expiresIn: "1d",
           }
         );
 
