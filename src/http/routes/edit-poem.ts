@@ -56,7 +56,8 @@ export async function editPoem(app: FastifyInstance) {
             id: poemId,
           },
           data: {
-            poem,
+            title: poem.title,
+            text: poem.text,
           },
         });
 
