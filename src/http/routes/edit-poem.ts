@@ -28,10 +28,11 @@ export async function editPoem(app: FastifyInstance) {
       const { poemId } = getPoemParams.parse(req.params);
 
       const getPoemBody = z.object({
-        poem: z.object(),
+        title: z.string(),
+        text: z.string(),
       });
 
-      const { text } = getPoemBody.parse(req.body);
+      const { title, text } = getPoemBody.parse(req.body);
 
       try {
         const decoded = Jwt.verify(
@@ -56,8 +57,8 @@ export async function editPoem(app: FastifyInstance) {
             id: poemId,
           },
           data: {
-            title: poem.title,
-            text: poem.text,
+            title,
+            text,
           },
         });
 
