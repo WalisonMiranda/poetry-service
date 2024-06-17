@@ -5,6 +5,7 @@ import cors from "@fastify/cors";
 import { signUp } from "./routes/sign-up";
 import { login } from "./routes/login";
 import { createPoem } from "./routes/create-poem";
+import { editPoem } from "./routes/edit-poem";
 import { getPoems } from "./routes/get-poems";
 import { getPoemById } from "./routes/get-poem-by-id";
 import { deletePoem } from "./routes/delete-poem";
@@ -29,6 +30,7 @@ app.register(cors, {
 app.register(signUp);
 app.register(login);
 app.register(createPoem);
+app.register(editPoem);
 app.register(getPoems);
 app.register(getPoemById);
 app.register(deletePoem);
