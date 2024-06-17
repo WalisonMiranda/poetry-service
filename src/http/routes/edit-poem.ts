@@ -28,7 +28,7 @@ export async function editPoem(app: FastifyInstance) {
       const { poemId } = getPoemParams.parse(req.params);
 
       const getPoemBody = z.object({
-        text: z.string(),
+        poem: z.object(),
       });
 
       const { text } = getPoemBody.parse(req.body);
@@ -56,7 +56,7 @@ export async function editPoem(app: FastifyInstance) {
             id: poemId,
           },
           data: {
-            text,
+            poem,
           },
         });
 
